@@ -14,11 +14,7 @@ import com.ibtech.task.enumeration.AdressType;
 
 @Entity
 @Table(name = "address")
-public class Address {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+public class Address extends BaseEntity{
 
 	private String country;
 	private String city;

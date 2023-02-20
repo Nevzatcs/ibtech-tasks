@@ -15,11 +15,7 @@ import com.ibtech.task.enumeration.Status;
 
 @Entity
 @Table(name = "account")
-public class Account {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+public class Account extends BaseEntity{
 
 	@Enumerated(EnumType.STRING)
 	private Currency currency;

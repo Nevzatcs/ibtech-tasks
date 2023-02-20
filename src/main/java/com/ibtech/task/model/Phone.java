@@ -10,11 +10,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "phone")
-public class Phone {
+public class Phone extends BaseEntity {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
 
 	private String countryCode;
 	private String number;

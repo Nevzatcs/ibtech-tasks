@@ -20,11 +20,25 @@ import com.ibtech.task.model.Phone;
 public class TaskDemo {
 	public static void main(String[] args) {
 
+		
 		String confFile = "resources/hibernate.cfg.xml";
 		ClassLoader classLoader = TaskDemo.class.getClassLoader();
 		File f = new File(classLoader.getResource(confFile).getFile());
 		SessionFactory sessionFactory = new AnnotationConfiguration().configure(f).buildSessionFactory();
 		Session session = sessionFactory.openSession();
+		
+
+		DatabaseWriteOperations dbWriteOperations = new DatabaseWriteOperations(session);
+		
+		//dbWriteOperations.createEntity(createCustomerObject());
+		
+		Customer fromDb = dbWriteOperations.getEntity(Customer.class, 5L);
+		
+		System.out.println("Read customer: " + fromDb.getFirstName());
+
+		//dbWriteOperations.updateEntity(3L);
+		
+		//dbWriteOperations.deleteEntity(4L);
 
 		//saveCustomerRecord(session);
 		//updateCustomerRecord(session);
@@ -32,9 +46,9 @@ public class TaskDemo {
 
 	}
 
-	private static void saveCustomerRecord(Session session) {
+	public static Customer createCustomerObject() {
 		Customer customer = new Customer();
-		customer.setFirstName("Mehmet");
+		customer.setFirstName("Vahdet");
 		customer.setLastName("Can");
 		customer.setCreateDate(new Date());
 		customer.setTckn("11111111110");
@@ -68,21 +82,9 @@ public class TaskDemo {
 		customer.setAccounts(Collections.singletonList(account));
 		customer.setPhones(Collections.singletonList(phone));
 		customer.setAdresses(Arrays.asList(homeAddress, workAddress));
-
-		org.hibernate.Transaction tx = null;
-
-		try {
-			tx = session.beginTransaction();
-			session.save(customer);
-			session.beginTransaction().commit();
-			System.out.println("Record saved succesfully...");
-
-		} catch (Exception e) {
-			tx.rollback();
-			throw e;
-		} finally {
-			session.close();
-			} 
+		
+		return customer;
+	
 
 	}
 
