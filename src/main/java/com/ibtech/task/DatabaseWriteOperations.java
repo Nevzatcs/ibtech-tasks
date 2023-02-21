@@ -16,7 +16,7 @@ public class DatabaseWriteOperations {
 	}
 	 
 
-	  public <T> void createEntity(T entity) {
+	  public <T> void createEntity(T entity) throws Exception {
 		  Transaction tx = null;
 		  try {
 				tx = session.beginTransaction();
@@ -33,7 +33,7 @@ public class DatabaseWriteOperations {
 		  
 	  }
 
-	  public <T> void updateEntity(Long id) {
+	  public <T> void updateEntity(Long id) throws Exception {
 	    
 	    Customer customer = (Customer) session.get(Customer.class, new Long(id));
 		customer.setFirstName("Veli");
@@ -56,7 +56,7 @@ public class DatabaseWriteOperations {
 			} 
 	  }
 
-	  public <T> void deleteEntity(Long id) {
+	  public <T> void deleteEntity(Long id) throws Exception {
 	
 	    Customer customer = (Customer) session.get(Customer.class, new Long(id));
 		

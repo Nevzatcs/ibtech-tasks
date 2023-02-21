@@ -18,7 +18,7 @@ import com.ibtech.task.model.Customer;
 import com.ibtech.task.model.Phone;
 
 public class TaskDemo {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 
 		String confFile = "resources/hibernate.cfg.xml";
 		ClassLoader classLoader = TaskDemo.class.getClassLoader();
