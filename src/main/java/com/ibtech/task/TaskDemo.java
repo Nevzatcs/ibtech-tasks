@@ -20,29 +20,23 @@ import com.ibtech.task.model.Phone;
 public class TaskDemo {
 	public static void main(String[] args) {
 
-		
 		String confFile = "resources/hibernate.cfg.xml";
 		ClassLoader classLoader = TaskDemo.class.getClassLoader();
 		File f = new File(classLoader.getResource(confFile).getFile());
 		SessionFactory sessionFactory = new AnnotationConfiguration().configure(f).buildSessionFactory();
-		Session session = sessionFactory.openSession();
-		
+		Session session = sessionFactory.openSession();	
 
 		DatabaseWriteOperations dbWriteOperations = new DatabaseWriteOperations(session);
 		
-		//dbWriteOperations.createEntity(createCustomerObject());
+		dbWriteOperations.createEntity(createCustomerObject());
 		
-		Customer fromDb = dbWriteOperations.getEntity(Customer.class, 5L);
+		//Customer fromDb = dbWriteOperations.getEntity(Customer.class, 5L);
 		
-		System.out.println("Read customer: " + fromDb.getFirstName());
+		//System.out.println("Read customer: " + fromDb.getFirstName());
 
 		//dbWriteOperations.updateEntity(3L);
 		
 		//dbWriteOperations.deleteEntity(4L);
-
-		//saveCustomerRecord(session);
-		//updateCustomerRecord(session);
-		//deleteCustomerRecord(session);
 
 	}
 
@@ -87,48 +81,4 @@ public class TaskDemo {
 	
 
 	}
-
-	private static void deleteCustomerRecord(Session session) {
-		int id = 2;
-		Customer customer = (Customer) session.get(Customer.class, new Integer(id));
-		
-		org.hibernate.Transaction tx = null;
-
-		try {
-			tx = session.beginTransaction();
-			session.delete(customer);
-			session.beginTransaction().commit();
-			System.out.println("Record deleted succesfully...");
-
-		} catch (Exception e) {
-			tx.rollback();
-			throw e;
-		} finally {
-			session.close();
-			}  
-	}
-
-	private static void updateCustomerRecord(Session session) {
-		int id = 3;
-		Customer customer = (Customer) session.get(Customer.class, new Integer(id));
-		customer.setFirstName("Ali");
-		customer.setModifyDate(new Date());
-		
-		org.hibernate.Transaction tx = null;
-
-		
-		try {
-			tx = session.beginTransaction();
-			session.saveOrUpdate(customer);
-			session.beginTransaction().commit();
-			System.out.println("Record updated succesfully...");
-
-		} catch (Exception e) {
-			tx.rollback();
-			throw e;
-		} finally {
-			session.close();
-			} 
-	}
-
 }

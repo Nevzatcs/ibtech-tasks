@@ -33,7 +33,6 @@ public class DatabaseWriteOperations {
 		  
 	  }
 
-
 	  public <T> void updateEntity(Long id) {
 	    
 	    Customer customer = (Customer) session.get(Customer.class, new Long(id));
